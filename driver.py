@@ -2,20 +2,24 @@ from serial import Serial, SerialException
 import time
 
 cxn = Serial("/dev/ttyACM0", baudrate=9600)
+time.sleep(2)
 
 while True:
     cmd = input("Select your Speed (0-10): ")
 
+
     if cmd == 'exit':
+        cxn.write(0)
         cxn.close()
         exit()
     else:
-        cxn.write(cmd)
-    #
-    #     out = ''
-    #
-    #     while cxn.inWaiting() > 0:
-    #         out += cxn.read(1)
-    #
-    #     if out != '':
-    #         print(out)
+        cmd = int(cmd)
+        cxn.write([cmd])
+        print 'Python: ' + str(cmd)
+
+        while cxn.inWaiting() < 1:
+            pass
+        print "Arduino: " + cxn.readline()
+
+        # if out != '':
+        #     print(out)
