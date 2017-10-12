@@ -19,7 +19,10 @@ while True:
 
         while cxn.inWaiting() < 1:
             pass
-        print "Arduino: " + cxn.readline()
+        msg = cxn.readline()
+        print "Arduino: " + msg
+        file = open('data','a')
+        file.write(msg)
 
         # if out != '':
         #     print(out)

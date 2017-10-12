@@ -98,6 +98,16 @@ void loop() {
     leftMotor->run(FORWARD);
   }
 
+  // Send data over serial
+  Serial.print(ir_left);
+  Serial.print(" , ");
+  Serial.print(ir_right);
+  Serial.print(" , ");
+  Serial.print(drive_L);
+  Serial.print(" , ");
+  Serial.print(drive_R);
+  Serial.println("");
+
   if(drive_R < 0) {
     rightMotor->run(BACKWARD);
   } else {
