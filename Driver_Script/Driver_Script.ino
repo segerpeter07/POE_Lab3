@@ -16,7 +16,7 @@ int baseSpeed = 10; // Base speed of the wheels
 int Kp = 2;         // Proportionality constant for control
 int driveSetting = 0; // Speed setting for the car
 
-int irThreshold = 100;
+int irThreshold = 350;
 
 byte msg = 1;
 
@@ -34,7 +34,7 @@ void loop() {
   // Read Serial Data
   if(Serial.available() > 0) {
     msg = Serial.read();
-    driveSetting = int(msg);
+    driveSetting = int(msg) - 48;
     Serial.println(driveSetting);
   }
 
@@ -66,14 +66,18 @@ void loop() {
 
   if(ir_left >= irThreshold) {
     // drive right more
+    // drive_R = -(baseSpeed)*driveSetting;
     drive_R = -(baseSpeed)*driveSetting;
-    // drive_R = ((val/Kp) + baseSpeed)*driveSetting;
     drive_L = (Kp*baseSpeed)*driveSetting;
+    //drive_R = (Kp*baseSpeed)*driveSetting;
+    //drive_L = (baseSpeed)*driveSetting;
   } else if(ir_right >= irThreshold) {
     // drive left more
-    // drive_L = ((val/Kp) + baseSpeed)*driveSetting;
-    drive_R = (Kp*baseSpeed)*driveSetting;
     drive_L = -(baseSpeed)*driveSetting;
+    drive_R = (Kp*baseSpeed)*driveSetting;
+    //drive_R = (baseSpeed)*driveSetting;
+    //drive_L = (Kp*baseSpeed)*driveSetting;
+    //drive_L = -(baseSpeed)*driveSetting;
   } else {
     // go forward
     drive_L = (baseSpeed)*driveSetting;
@@ -92,12 +96,6 @@ void loop() {
   rightMotor->setSpeed(abs(drive_R));
 
 
-  if(drive_L < 0) {
-    leftMotor->run(BACKWARD);
-  } else {
-    leftMotor->run(FORWARD);
-  }
-
   // Send data over serial
   Serial.print(ir_left);
   Serial.print(" , ");
@@ -107,6 +105,13 @@ void loop() {
   Serial.print(" , ");
   Serial.print(drive_R);
   Serial.println("");
+
+
+  if(drive_L < 0) {
+    leftMotor->run(BACKWARD);
+  } else {
+    leftMotor->run(FORWARD);
+  }
 
   if(drive_R < 0) {
     rightMotor->run(BACKWARD);

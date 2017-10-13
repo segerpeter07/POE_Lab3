@@ -6,7 +6,7 @@ import plotly.plotly as py
 import math
 import re
 
-cxn = Serial("/dev/ttyACM1", baudrate=9600)
+cxn = Serial("/dev/ttyACM0", baudrate=9600)
 ir_list = []
 
 fig = plt.figure()

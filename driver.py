@@ -1,7 +1,7 @@
 from serial import Serial, SerialException
 import time
 
-cxn = Serial("/dev/ttyACM0", baudrate=9600)
+cxn = Serial("/dev/ttyACM1", baudrate=9600)
 time.sleep(2)
 
 while True:
@@ -20,9 +20,7 @@ while True:
         while cxn.inWaiting() < 1:
             pass
         msg = cxn.readline()
-        print "Arduino: " + msg
+        # print "Arduino: " + msg
         file = open('data','a')
         file.write(msg)
-
-        # if out != '':
-        #     print(out)
+        file.close()

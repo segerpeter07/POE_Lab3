@@ -4,17 +4,19 @@ I intentionally use the const byte construct here
 instead of #define. It's less dangerous (no name collision possible)
 and safer since variables have scope.
 */
-const byte IR = A0;
+const byte IR = A1;
 long prev_t = 0;
 int ir_value = 100;
 byte cmd_id = 0; 
 
 void setup() {
   Serial.begin(9600);
+  pinMode(8, OUTPUT);
 }
 
 void loop() {
 
+ digitalWrite(8, HIGH);
  for (int i=0; i <= 255; i++){
   if(i <= 254) {
     delay(50);
