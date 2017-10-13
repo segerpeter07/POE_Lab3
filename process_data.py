@@ -1,13 +1,7 @@
 import matplotlib.pyplot as plt
-import plotly.plotly as py
-import plotly.graph_objs as go
-import numpy as np
 import re
-import math
-import os
 
 while True:
-    # py.sign_in('segerpeter07', os.environ.get('PLOTLY_API_KEY'))
 
     time = []
     ir_left = []
@@ -41,32 +35,3 @@ while True:
     plt.plot(time, drive_r)
 
     plt.show()
-    # trace0 = go.Scatter(
-    #     x = time,
-    #     y = ir_left,
-    #     mode = 'lines',
-    #     name = 'IR-Left'
-    # )
-    # trace1 = go.Scatter(
-    #     x = time,
-    #     y = ir_right,
-    #     mode = 'lines',
-    #     name = 'IR-Right'
-    # )
-    # trace2 = go.Scatter(
-    #     x = time,
-    #     y = drive_l,
-    #     mode = 'lines',
-    #     name = 'Motor-Left'
-    # )
-    # trace3 = go.Scatter(
-    #     x = time,
-    #     y = drive_r,
-    #     mode = 'lines',
-    #     name = 'Motor-Right'
-    # )
-    #
-    # plots = [trace0, trace1, trace2, trace3]
-    #
-    # py.image.save_as(plots, filename='line-mode.png')
-    # py.iplot(data, filename='line-mode')

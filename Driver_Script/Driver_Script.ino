@@ -46,50 +46,16 @@ void loop() {
   // Compare Sensor Values
   int val = abs(ir_left - ir_right);
 
-/*
   if(ir_left >= irThreshold) {
-    // drive right more
-    drive_L = -(baseSpeed)*driveSetting;
-    // drive_R = ((val/Kp) + baseSpeed)*driveSetting;
-    drive_R = (Kp*baseSpeed)*driveSetting;
-  } else if(ir_right >= irThreshold) {
-    // drive left more
-    // drive_L = ((val/Kp) + baseSpeed)*driveSetting;
-    drive_L = (Kp*baseSpeed)*driveSetting;
     drive_R = -(baseSpeed)*driveSetting;
+    drive_L = (Kp*baseSpeed)*driveSetting;
+  } else if(ir_right >= irThreshold) {
+    drive_L = -(baseSpeed)*driveSetting;
+    drive_R = (Kp*baseSpeed)*driveSetting;
   } else {
-    // go forward
     drive_L = (baseSpeed)*driveSetting;
     drive_R = (baseSpeed)*driveSetting;
   }
-*/
-
-  if(ir_left >= irThreshold) {
-    // drive right more
-    // drive_R = -(baseSpeed)*driveSetting;
-    drive_R = -(baseSpeed)*driveSetting;
-    drive_L = (Kp*baseSpeed)*driveSetting;
-    //drive_R = (Kp*baseSpeed)*driveSetting;
-    //drive_L = (baseSpeed)*driveSetting;
-  } else if(ir_right >= irThreshold) {
-    // drive left more
-    drive_L = -(baseSpeed)*driveSetting;
-    drive_R = (Kp*baseSpeed)*driveSetting;
-    //drive_R = (baseSpeed)*driveSetting;
-    //drive_L = (Kp*baseSpeed)*driveSetting;
-    //drive_L = -(baseSpeed)*driveSetting;
-  } else {
-    // go forward
-    drive_L = (baseSpeed)*driveSetting;
-    drive_R = (baseSpeed)*driveSetting;
-  }
-
-/*
-  Serial.print(drive_L);
-  Serial.print(" , ");
-  Serial.print(drive_R);
-  Serial.println("");
-*/
 
   // Send drive commands to motors
   leftMotor->setSpeed(abs(drive_L));
@@ -118,8 +84,4 @@ void loop() {
   } else {
     rightMotor->run(FORWARD);
   }
-/*  
-  leftMotor->run(FORWARD);
-  rightMotor->run(FORWARD);
-*/
 }
